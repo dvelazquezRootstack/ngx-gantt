@@ -99,9 +99,10 @@ export class NgxGanttRootComponent implements OnInit, OnDestroy {
                 this.setupViewScroll();
                 // 优化初始化时Scroll滚动体验问题，通过透明度解决，默认透明度为0，滚动结束后恢复
                 this.elementRef.nativeElement.style.opacity = '1';
-                this.ganttUpper.viewChange.pipe(startWith<null, null>(null), takeUntil(this.unsubscribe$)).subscribe(() => {
-                    this.scrollToToday();
-                });
+                // No scroll to today on re render, handle yourself the scroll
+                // this.ganttUpper.viewChange.pipe(startWith<null, null>(null), takeUntil(this.unsubscribe$)).subscribe(() => {
+                //     this.scrollToToday();
+                // });
                 this.computeScrollBarOffset();
             });
         });
